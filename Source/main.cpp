@@ -1,4 +1,4 @@
-#include </Users/eavosloo/Programming/C++/sfml_projects/X1/Header/Game.hpp>
+#include </Users/eavosloo/Programming/C++/sfml_projects/BlockClicker/Header/Game.hpp>
 #include <Header/Game.hpp>
 
 int main()
