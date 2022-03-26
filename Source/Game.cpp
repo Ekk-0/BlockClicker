@@ -1,5 +1,5 @@
 #include </Users/eavosloo/Programming/C++/sfml_projects/X1/Header/Game.hpp>
-//#include <Header/Game.hpp>
+#include <Header/Game.hpp>
 
 void Game::initializeVariables(){
     this->window = nullptr;
