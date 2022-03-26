@@ -25,7 +25,7 @@ void Game::initWindow() {
 }
 
 void Game::initFonts() {
-    if(this->font.loadFromFile("Fonts/Dosis-Light.ttf"))
+    if(this->font.loadFromFile("/Users/eavosloo/Programming/C++/sfml_projects/BlockClicker/Fonts/Dosis-Light.ttf"))
     {
         std::cout << "ERROR::GAME::INITFONTS::Failed to load fonts";
     }
