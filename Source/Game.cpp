@@ -1,5 +1,5 @@
 #include </Users/eavosloo/Programming/C++/sfml_projects/BlockClicker/Header/Game.hpp>
-#include <Header/Game.hpp>
+//#include <Header/Game.hpp>
 
 void Game::initializeVariables(){
     this->window = nullptr;
@@ -24,6 +24,20 @@ void Game::initWindow() {
     this->window->setFramerateLimit(60);
 }
 
+void Game::initFonts() {
+    if(this->font.loadFromFile("Fonts/Dosis-Light.ttf"))
+    {
+        std::cout << "ERROR::GAME::INITFONTS::Failed to load fonts";
+    }
+}
+
+void Game::initText() {
+    this->uiText.setFont(this->font);
+    this->uiText.setCharacterSize(24);
+    this->uiText.setFillColor(sf::Color::White);
+    this->uiText.setString("NONE");
+}
+
 void Game::initEnemies() {
     this->enemy.setPosition(50.f, 50.f);
     this->enemy.setSize(sf::Vector2f(100.f, 100.f));
@@ -37,6 +51,8 @@ void Game::initEnemies() {
 Game::Game() {
     this->initializeVariables();
     this->initWindow();
+    this->initFonts();
+    this->initText();
     this->initEnemies();
 }
 
@@ -101,6 +117,16 @@ void Game::updateMousePositions()
     */
    this->mousePosWindow = sf::Mouse::getPosition(*this->window);
    this->mousePosView = this->window->mapPixelToCoords(this->mousePosWindow);
+
+}
+
+void Game::updateText() {
+    std::stringstream ss;
+    
+    ss << "Points: " << this->points << '\n'
+        << "Health: " << this->health << '\n';
+
+    this->uiText.setString(ss.str());
 
 }
 
@@ -178,6 +204,8 @@ void Game::update() {
     {
         this->updateMousePositions();
 
+        this->updateText();
+
         this->updateEnemies();
     }
 
@@ -187,11 +215,15 @@ void Game::update() {
 
 }
 
-void Game::renderEnemies()
+void Game::renderText(sf::RenderTarget& target) {
+    target.draw(this->uiText);
+}
+
+void Game::renderEnemies(sf::RenderTarget& target)
 {
     for(auto &e : this->enemies)
     {
-       this->window->draw(e);
+       target.draw(e);
     }
     
 }
@@ -203,7 +235,9 @@ void Game::render() {
     this->window->clear();
 
     // Draw game objects
-    this->renderEnemies();
+    this->renderEnemies(*this->window);
+
+    this->renderText(*this->window);
     
   
     this->window->display();
