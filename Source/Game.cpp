@@ -7,10 +7,10 @@ void Game::initializeVariables(){
     // Game logic
     this->endGame = false;
     this->points = 0;
-    this->health = 20;
-    this->enemySpawnTimerMax = 20.f;
+    this->health = 25;
+    this->enemySpawnTimerMax = 30.f;
     this->enemySpawnTimer = this->enemySpawnTimerMax;
-    this->maxEnemies = 5;
+    this->maxEnemies = 6;
     this->mouseHeld = false;
 
 }
@@ -19,10 +19,11 @@ void Game::initWindow() {
     this->videoMode.height = 600;
     this->videoMode.width = 800;
     
-    this->window = new sf::RenderWindow(this->videoMode, "Game 1", sf::Style::Titlebar | sf::Style::Close);
+    this->window = new sf::RenderWindow(this->videoMode, "Block Clicker", sf::Style::Titlebar | sf::Style::Close);
 
     this->window->setFramerateLimit(60);
 }
+
 
 void Game::initFonts() {
     if(this->font.loadFromFile("/Users/eavosloo/Programming/C++/sfml_projects/BlockClicker/Fonts/Dosis-Light.ttf"))
@@ -31,6 +32,7 @@ void Game::initFonts() {
     }
 }
 
+
 void Game::initText() {
     this->uiText.setFont(this->font);
     this->uiText.setCharacterSize(24);
@@ -38,14 +40,14 @@ void Game::initText() {
     this->uiText.setString("NONE");
 }
 
+
 void Game::initEnemies() {
     this->enemy.setPosition(50.f, 50.f);
     this->enemy.setSize(sf::Vector2f(100.f, 100.f));
     this->enemy.setFillColor(sf::Color::Cyan);
-    // this->enemy.setOutlineColor(sf::Color::Green);
-    // this->enemy.setOutlineThickness(1.f);
-    
 }
+
+
 // Constructors / Destructors
 Game::Game() {
     this->initializeVariables();
@@ -55,18 +57,22 @@ Game::Game() {
     this->initEnemies();
 }
 
+
 Game::~Game() {
     delete this->window;
 }
+
 
 //Accessors
 const bool Game::getWindowIsOpen() const{
     return this->window->isOpen();
 }
+
 const bool Game::getEndGame() const
 {
     return this->endGame;
 }
+
 
 
 //Functions
@@ -192,7 +198,6 @@ void Game::updateEnemies()
     }
 
     // Check if clicked
-
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
         if(this->mouseHeld == false) 
@@ -278,6 +283,5 @@ void Game::render() {
 
     this->renderText(*this->window);
     
-  
     this->window->display();
 }
