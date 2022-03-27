@@ -20,7 +20,7 @@
 class Game
 {
     public:
-        //Constructors / Destßructor
+        //Constructors / Destructor
         Game();
         virtual ~Game();
         // Accessors
