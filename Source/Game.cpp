@@ -194,7 +194,6 @@ void Game::updateEnemies()
             std::cout << "Health: " << this->health << std::endl;
         }
             
-        
     }
 
     // Check if clicked
@@ -255,7 +254,6 @@ void Game::update() {
 
     if(this->health <= 0)
         this->endGame = true;
-
 
 }
 
